@@ -1,0 +1,9 @@
+{
+  "name": "my-ai-agent-monorepo",
+  "private": true,
+  "description": "Cloudflare Agents Fast Track Project",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}

@@ -1,0 +1,17 @@
+name = "edge-ai-backend"
+main = "src/index.ts"
+compatibility_date = "2024-11-01"
+
+# REQUIREMENT: LLM Binding
+[ai]
+binding = "AI"
+remote = true
+
+# REQUIREMENT: Memory (Durable Objects Binding)
+[[durable_objects.bindings]]
+name = "myAgent"
+class_name = "MyAgent"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["MyAgent"]
