@@ -7,12 +7,22 @@ function App() {
   const socket = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    const host = window.location.hostname === "localhost"
-      ? "localhost:8787"
-      : "edge-ai-backend.your-subdomain.workers.dev";
-    const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+    const configuredWsUrl = import.meta.env.VITE_AGENT_WS_URL?.trim();
+    const wsUrl = configuredWsUrl || "ws://localhost:8787/agents/my-agent/default";
 
-    socket.current = new WebSocket(`${protocol}//${host}/agents/my-agent/default`);
+    if (!configuredWsUrl && window.location.hostname !== "localhost") {
+      setStatus("error");
+      setMessages([
+        {
+          role: "system",
+          content:
+            "Missing VITE_AGENT_WS_URL. Set it at build time, e.g. wss://<your-worker>.workers.dev/agents/my-agent/default",
+        },
+      ]);
+      return;
+    }
+
+    socket.current = new WebSocket(wsUrl);
 
     socket.current.onopen = () => setStatus("connected");
     socket.current.onclose = () => setStatus("disconnected");

@@ -2,6 +2,13 @@
   "name": "my-ai-agent-monorepo",
   "private": true,
   "description": "Cloudflare Agents Fast Track Project",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "deploy:backend": "npm --prefix backend run deploy"
+  },
   "workspaces": [
     "backend",
     "frontend"
