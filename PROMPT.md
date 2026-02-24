@@ -1,0 +1,1 @@
+Currently, I have no experience on TypeScript and React, but I'm very willing to study them. So I asked GPT-5.3-Codex to construct this repo and debugging. I provided the requirements of the assignment and problems during execution as the input of LLMs, and Codex do the coding for me.
