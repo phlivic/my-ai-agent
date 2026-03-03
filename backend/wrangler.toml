@@ -2,6 +2,12 @@ name = "edge-ai-backend"
 main = "src/index.ts"
 compatibility_date = "2024-11-01"
 
+[vars]
+NEWS_PROVIDER = "newsapi"
+DEFAULT_TIMEZONE = "America/Chicago"
+DEFAULT_LOCALE = "en-US"
+RECOMMENDATION_BATCH_SIZE = "3"
+
 # REQUIREMENT: LLM Binding
 [ai]
 binding = "AI"
@@ -12,6 +18,14 @@ remote = true
 name = "myAgent"
 class_name = "MyAgent"
 
+[[durable_objects.bindings]]
+name = "RECOMMENDATION_STORE"
+class_name = "RecommendationStore"
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["MyAgent"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["RecommendationStore"]

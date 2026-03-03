@@ -1,0 +1,5 @@
+# Copy this file to backend/.dev.vars for local development only.
+# Do not commit backend/.dev.vars.
+# https://newsapi.org/
+
+NEWSAPI_API_KEY="paste_your_newsapi_key_here"

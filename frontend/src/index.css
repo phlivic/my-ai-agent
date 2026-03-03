@@ -2,12 +2,510 @@ html,
 body,
 #root {
   margin: 0;
-  padding: 0;
   min-height: 100%;
-  font-family: Arial, sans-serif;
+}
+
+:root {
+  color: #13212c;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(132, 187, 255, 0.24), transparent 35%),
+    linear-gradient(180deg, #eef4fb 0%, #f8fafc 100%);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: #f7f7f8;
-  color: #111;
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+
+.chat-card,
+.preference-drawer {
+  border: 1px solid rgba(19, 33, 44, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 24px 60px rgba(39, 63, 82, 0.12);
+}
+
+.chat-card {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.chat-header,
+.preference-panel-header,
+.section-heading,
+.panel-footer,
+.tag-composer,
+.preference-panel-actions,
+.panel-footer-actions,
+.header-actions,
+.language-toggle {
+  display: flex;
+}
+
+.chat-header {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chat-header h1,
+.preference-panel-header h2,
+.section-heading h3 {
+  margin: 0;
+}
+
+.chat-header h1 {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.status-line,
+.preference-panel-copy,
+.section-meta,
+.panel-footer-copy,
+.empty-copy {
+  color: #5f7282;
+}
+
+.status-line {
+  margin: 8px 0 0;
+}
+
+.header-actions,
+.preference-panel-actions,
+.panel-footer-actions,
+.language-toggle {
+  gap: 10px;
+}
+
+.idea-button,
+.preference-button,
+.send-button,
+.save-button,
+.lock-button,
+.panel-link-button,
+.tag-composer button,
+.tag-chip,
+.language-option {
+  border: 0;
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    opacity 120ms ease,
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.idea-button,
+.preference-button {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  font-size: 1.35rem;
+}
+
+.idea-button {
+  background: linear-gradient(135deg, #ffd65c 0%, #ff9f43 100%);
+  box-shadow: 0 12px 24px rgba(255, 172, 71, 0.28);
+}
+
+.preference-button {
+  background: linear-gradient(135deg, #ff9ac6 0%, #ff6b9d 100%);
+  box-shadow: 0 12px 24px rgba(255, 107, 157, 0.24);
+}
+
+.preference-button.is-active {
+  outline: 2px solid rgba(255, 107, 157, 0.35);
+}
+
+.idea-button:hover:not(:disabled),
+.preference-button:hover:not(:disabled),
+.send-button:hover:not(:disabled),
+.save-button:hover:not(:disabled),
+.lock-button:hover:not(:disabled),
+.panel-link-button:hover:not(:disabled),
+.tag-composer button:hover:not(:disabled),
+.tag-chip:hover:not(:disabled),
+.language-option:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.recommendation-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: #f2f7ff;
+  border: 1px solid rgba(62, 109, 176, 0.14);
+}
+
+.recommendation-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #607890;
+}
+
+.recommendation-title {
+  font-weight: 600;
+}
+
+.recommendation-error,
+.preference-error {
+  margin: 16px 0 0;
+  color: #b42318;
+}
+
+.message-list {
+  height: 420px;
+  margin-top: 18px;
+  overflow-y: auto;
+  border: 1px solid rgba(19, 33, 44, 0.08);
+  border-radius: 18px;
+  background: #fbfdff;
+  padding: 16px;
+}
+
+.message-row {
+  margin-bottom: 12px;
+}
+
+.message-row p {
+  display: inline-block;
+  max-width: 88%;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 16px;
+  line-height: 1.5;
+}
+
+.message-row.is-user {
+  text-align: right;
+}
+
+.message-row.is-user p {
+  background: #13212c;
+  color: #f8fbff;
+}
+
+.message-row.is-other p {
+  background: #edf3f8;
+}
+
+.composer {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.composer-input,
+.profile-name-field input,
+.tag-composer input {
+  width: 100%;
+  border: 1px solid rgba(19, 33, 44, 0.14);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.composer-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 14px 16px;
+}
+
+.composer-input:focus,
+.profile-name-field input:focus,
+.tag-composer input:focus {
+  outline: 2px solid rgba(57, 122, 255, 0.2);
+  border-color: rgba(57, 122, 255, 0.5);
+}
+
+.send-button,
+.save-button {
+  color: #fff;
+  border-radius: 16px;
+}
+
+.send-button {
+  min-width: 104px;
+  padding: 0 18px;
+  background: linear-gradient(135deg, #172634 0%, #2f4c68 100%);
+}
+
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(19, 33, 44, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.drawer-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.preference-drawer {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  bottom: 16px;
+  width: min(420px, calc(100vw - 24px));
+  padding: 22px;
+  overflow-y: auto;
+  transform: translateX(calc(100% + 24px));
+  transition: transform 220ms ease;
+  z-index: 10;
+}
+
+.preference-drawer.is-open {
+  transform: translateX(0);
+}
+
+.preference-panel-header,
+.panel-footer {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.preference-panel-copy {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.lock-button,
+.panel-link-button,
+.tag-composer button,
+.language-option {
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.lock-button.is-locked {
+  background: #172634;
+  color: #fff;
+}
+
+.lock-button.is-adaptive {
+  background: #ffe7ef;
+  color: #8f2651;
+}
+
+.panel-link-button {
+  background: #eef3f8;
+  color: #32485a;
+}
+
+.panel-loading {
+  padding: 24px 0 8px;
+  color: #5f7282;
+}
+
+.preference-panel-body {
+  margin-top: 18px;
+}
+
+.profile-name-field {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.profile-name-field span {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.profile-name-field input,
+.tag-composer input {
+  padding: 12px 14px;
+}
+
+.tag-section {
+  margin-bottom: 18px;
+}
+
+.section-heading {
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.section-heading h3 {
+  font-size: 1rem;
+}
+
+.section-meta {
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.language-toggle {
+  flex-wrap: wrap;
+}
+
+.language-option {
+  background: #eef3f8;
+  color: #233746;
+}
+
+.language-option.is-selected {
+  background: #13212c;
+  color: #fff;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 28px;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: #eef3f8;
+  color: #233746;
+}
+
+.tag-chip-remove {
+  opacity: 0.65;
+}
+
+.tag-composer {
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tag-composer button {
+  background: #172634;
+  color: #fff;
+}
+
+.recent-changes {
+  margin-top: 22px;
+}
+
+.recent-changes ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+}
+
+.recent-changes li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.change-pill {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.change-pill.manual {
+  background: #e5eef8;
+  color: #33506b;
+}
+
+.change-pill.inferred {
+  background: #ffe7ef;
+  color: #8f2651;
+}
+
+.panel-footer {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(19, 33, 44, 0.08);
+}
+
+.panel-footer-copy {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.panel-footer-actions {
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.save-button {
+  min-width: 150px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #172634 0%, #2f4c68 100%);
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    padding: 16px 12px;
+  }
+
+  .chat-card,
+  .preference-drawer {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .chat-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .message-list {
+    height: 360px;
+  }
+
+  .composer,
+  .tag-composer,
+  .panel-footer,
+  .preference-panel-header,
+  .panel-footer-actions,
+  .preference-panel-actions {
+    flex-direction: column;
+  }
+
+  .preference-drawer {
+    top: 8px;
+    right: 8px;
+    bottom: 8px;
+    width: calc(100vw - 16px);
+  }
+
+  .send-button,
+  .save-button,
+  .lock-button,
+  .panel-link-button,
+  .tag-composer button,
+  .language-option {
+    width: 100%;
+    min-height: 46px;
+  }
 }

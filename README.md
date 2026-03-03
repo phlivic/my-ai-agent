@@ -59,6 +59,7 @@ Then open `http://localhost:5173`.
 Notes:
 - The frontend defaults to `ws://localhost:8787/agents/my-agent/default` for local development.
 - This works with the current backend config in `backend/wrangler.toml`.
+- For "ideas" Function, see instructions in `backend/.dev.vars.example`. Basically needs to copy the file, rename it and put your token from following website, then it will work!
 
 ## 4. Deploy Backend
 
