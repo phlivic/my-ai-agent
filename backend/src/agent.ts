@@ -192,7 +192,7 @@ export class MyAgent extends Agent<AppEnv, AgentState> {
 function getReplyLanguageInstruction(userText: string, languages: string[] | undefined): string {
   const explicitOverride = detectExplicitLanguageOverride(userText);
   if (explicitOverride === "zh") {
-    return "Reply in Simplified Chinese for this message. Do not answer in English.";
+    return "请用简体中文回复此消息。请勿使用英语作答。";
   }
   if (explicitOverride === "en") {
     return "Reply in English for this message. Do not answer in Chinese.";
@@ -200,7 +200,7 @@ function getReplyLanguageInstruction(userText: string, languages: string[] | und
 
   const primaryLanguage = languages?.[0]?.trim().toLowerCase() || "english";
   if (primaryLanguage.startsWith("chinese") || primaryLanguage.startsWith("zh")) {
-    return "Reply in Simplified Chinese only. Do not switch to another language just because the user's message is written in another language. Only switch if the user explicitly asks for another language in this message.";
+    return "仅使用简体中文进行回复。不要仅仅因为用户的消息使用了其他语言，就切换到该语言进行回复。仅当用户在当前消息中明确要求使用其他语言时，才进行语言切换。";
   }
   return "Reply in English only. Do not switch to another language just because the user's message is written in another language. Only switch if the user explicitly asks for another language in this message.";
 }
